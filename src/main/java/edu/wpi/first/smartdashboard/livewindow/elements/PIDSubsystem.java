@@ -1,10 +1,11 @@
 package edu.wpi.first.smartdashboard.livewindow.elements;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import edu.wpi.first.smartdashboard.gui.elements.PIDEditor;
 import edu.wpi.first.smartdashboard.types.DataType;
 import edu.wpi.first.smartdashboard.types.named.PIDSubsystemType;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author Sam Carlberg

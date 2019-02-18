@@ -1,17 +1,19 @@
 package edu.wpi.first.smartdashboard.livewindow.elements;
 
-import edu.wpi.first.smartdashboard.gui.elements.bindings.AbstractTableWidget;
-import edu.wpi.first.smartdashboard.gui.elements.bindings.NumberBindable;
-import edu.wpi.first.smartdashboard.properties.Property;
-import edu.wpi.first.smartdashboard.types.DataType;
-import edu.wpi.first.smartdashboard.types.named.SpeedControllerType;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
 import javax.swing.JButton;
+
+import edu.wpi.first.smartdashboard.gui.elements.bindings.AbstractTableWidget;
+import edu.wpi.first.smartdashboard.gui.elements.bindings.NumberBindable;
+import edu.wpi.first.smartdashboard.properties.Property;
+import edu.wpi.first.smartdashboard.types.DataType;
+import edu.wpi.first.smartdashboard.types.named.SpeedControllerType;
 
 /**
  * Used to control SpeedControllers such as Victors.

@@ -1,5 +1,18 @@
 package edu.wpi.first.smartdashboard.livewindow.elements;
 
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.SwingUtilities;
+
 import edu.wpi.first.smartdashboard.gui.MainPanel;
 import edu.wpi.first.smartdashboard.gui.Widget;
 import edu.wpi.first.smartdashboard.gui.elements.bindings.AbstractTableWidget;
@@ -9,17 +22,6 @@ import edu.wpi.first.smartdashboard.types.named.LWSubsystemType;
 import edu.wpi.first.smartdashboard.xml.SmartDashboardXMLReader;
 import edu.wpi.first.wpilibj.tables.ITable;
 import edu.wpi.first.wpilibj.tables.ITableListener;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.SwingUtilities;
 
 /**
  * The main player in the Live Window. Subsystems hold every component that
@@ -30,7 +32,7 @@ import javax.swing.SwingUtilities;
  */
 public class LWSubsystem extends AbstractTableWidget {
 
-  public static final DataType[] TYPES = {LWSubsystemType.get()};
+  public static final DataType[] TYPES = { LWSubsystemType.get() };
   private BoxLayout layout;
   private Dimension preferredSize = new Dimension(100, 100);
   /**
@@ -56,7 +58,7 @@ public class LWSubsystem extends AbstractTableWidget {
   private static SmartDashboardXMLReader reader;
 
   public LWSubsystem() {
-    super(true); //listen for sub tables
+    super(true); // listen for sub tables
     MainPanel.getPanel("LiveWindow").addSubsystem(this);
   }
 
@@ -83,12 +85,10 @@ public class LWSubsystem extends AbstractTableWidget {
       }
     }
     try {
-      System.out.println(
-          "\nSubsystem \"" + getFieldName() + "\" does not contain widget \"" + key + "\"");
+      System.out.println("\nSubsystem \"" + getFieldName() + "\" does not contain widget \"" + key + "\"");
       System.out.println("Table: " + value);
       System.out.println("Type: " + value.getString(".type", null));
-      System.out.println(
-          "Trying to add a widget of type \"" + DataType.getType(value) + "\" and key " + key);
+      System.out.println("Trying to add a widget of type \"" + DataType.getType(value) + "\" and key " + key);
       Class<? extends Widget> widgetClass = DataType.getType(value).getDefault();
       Widget widget = widgetClass.newInstance();
       widget.setFieldName(key);
@@ -113,8 +113,8 @@ public class LWSubsystem extends AbstractTableWidget {
 
   /**
    * @param source Required by ITableListener. Not used.
-   * @param key The name of the changed table.
-   * @param isNew Required by ITableListener. Not used.
+   * @param key    The name of the changed table.
+   * @param isNew  Required by ITableListener. Not used.
    */
   @Override
   public void tableChanged(ITable source, final String key, final ITable table, boolean isNew) {
@@ -125,8 +125,8 @@ public class LWSubsystem extends AbstractTableWidget {
 
     if (!alreadyHasWidget) {
       table.addTableListenerEx(".type", new ITableListener() {
-        public void valueChanged(final ITable typeSource, final String typeKey, final Object
-            typeValue, final boolean typeIsNew) {
+        public void valueChanged(final ITable typeSource, final String typeKey, final Object typeValue,
+            final boolean typeIsNew) {
           table.removeTableListener(this);
           SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -215,8 +215,7 @@ public class LWSubsystem extends AbstractTableWidget {
 
           final int mouseY = e.getY(); // Mouse's y-coordinate. We don't care about its x-coord
           int index = subsystem.getComponentZOrder(selected); // The index of the dragged widget
-          int newIndex = index + (
-              mouseY < yclick ? -1 : 1); // The index to insert the dragged widget
+          int newIndex = index + (mouseY < yclick ? -1 : 1); // The index to insert the dragged widget
 
           boolean goingUp = false; // Flags for which direction the widget is being dragged
           boolean goingDown = false;
@@ -231,8 +230,7 @@ public class LWSubsystem extends AbstractTableWidget {
             Component next = subsystem.getComponent(newIndex);
 
             // If the stars align... move the widget
-            if ((goingDown && mouseY > next.getY() + next.getHeight())
-                || (goingUp && mouseY < next.getY())) {
+            if ((goingDown && mouseY > next.getY() + next.getHeight()) || (goingUp && mouseY < next.getY())) {
               subsystem.remove(selected);
               subsystem.add(selected, newIndex);
             }

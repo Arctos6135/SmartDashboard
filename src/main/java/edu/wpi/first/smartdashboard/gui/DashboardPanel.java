@@ -46,8 +46,7 @@ public class DashboardPanel extends JPanel {
     try {
       var imgStream = ClassLoader.getSystemClassLoader().getResourceAsStream("arctos2.PNG");
       arctosLogo = ImageIO.read(imgStream);
-    }
-    catch(Exception e) {
+    } catch (Exception e) {
       System.out.println("I don't care");
     }
   }
@@ -55,9 +54,9 @@ public class DashboardPanel extends JPanel {
   public static class BackPane extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
-    System.out.println("Paint component");
-    super.paintComponent(g);
-    if(arctosify) 
+      System.out.println("Paint component");
+      super.paintComponent(g);
+      if (arctosify)
         g.drawImage(arctosLogo, 0, 0, getWidth(), getHeight(), null);
     }
   }
@@ -142,8 +141,8 @@ public class DashboardPanel extends JPanel {
   }
 
   /**
-   * Sets whether or not this panel is editable. If the panel becomes
-   * editable, then it will pull the focus from the widgets.
+   * Sets whether or not this panel is editable. If the panel becomes editable,
+   * then it will pull the focus from the widgets.
    *
    * @param editable whether or not the pane should be editable
    */
@@ -166,9 +165,9 @@ public class DashboardPanel extends JPanel {
   }
 
   /**
-   * Returns the names of all the fields marked as hidden (they are the ones
-   * in the {@link ITable} that have been explicitly declared to be ignored by
-   * the user).
+   * Returns the names of all the fields marked as hidden (they are the ones in
+   * the {@link ITable} that have been explicitly declared to be ignored by the
+   * user).
    *
    * @return the hidden fields
    */
@@ -187,14 +186,13 @@ public class DashboardPanel extends JPanel {
   }
 
   /**
-   * Takes the given value and manipulates it based on the given type to be
-   * able to be handed to a {@link Widget}. Basically, if the type is a
-   * primitive, the value will be returned. If the type is a
-   * {@link NamedDataType}, then the data subtable will be returned. If either
-   * the type of the value is {@code null}, then {@code null} will be
-   * returned.
+   * Takes the given value and manipulates it based on the given type to be able
+   * to be handed to a {@link Widget}. Basically, if the type is a primitive, the
+   * value will be returned. If the type is a {@link NamedDataType}, then the data
+   * subtable will be returned. If either the type of the value is {@code null},
+   * then {@code null} will be returned.
    *
-   * @param type the type of the data
+   * @param type  the type of the data
    * @param value the data
    * @return the data to be handed to a {@link Widget}
    */
@@ -221,7 +219,6 @@ public class DashboardPanel extends JPanel {
     }
     elements.clear();
 
-
     table.removeTableListener(listener);
     table.addTableListenerEx(listener,
         ITable.NOTIFY_IMMEDIATE | ITable.NOTIFY_LOCAL | ITable.NOTIFY_NEW | ITable.NOTIFY_UPDATE);
@@ -247,8 +244,8 @@ public class DashboardPanel extends JPanel {
   }
 
   /**
-   * Removes the field with the given name from the screen. The field will
-   * then be added to the list of fields which should remain hidden.
+   * Removes the field with the given name from the screen. The field will then be
+   * added to the list of fields which should remain hidden.
    *
    * @param field the field to remove
    */
@@ -279,8 +276,8 @@ public class DashboardPanel extends JPanel {
   }
 
   /**
-   * Shifts the given element behind all the other ones. Every other element
-   * will then be drawn in front of the given one.
+   * Shifts the given element behind all the other ones. Every other element will
+   * then be drawn in front of the given one.
    *
    * @param element the element to shift
    */
@@ -300,13 +297,13 @@ public class DashboardPanel extends JPanel {
   }
 
   /**
-   * Adds the given display element to the screen, putting it at the given
-   * point. If the given point is {@code null}, then it will find a place to
-   * put it. If the point is not {@code null}, then the given
-   * {@link DisplayElement} should already have set its size.
+   * Adds the given display element to the screen, putting it at the given point.
+   * If the given point is {@code null}, then it will find a place to put it. If
+   * the point is not {@code null}, then the given {@link DisplayElement} should
+   * already have set its size.
    *
    * @param element the element to add
-   * @param point the location to put it (or null, if one needs to be found)
+   * @param point   the location to put it (or null, if one needs to be found)
    */
   public void addElement(DisplayElement element, Point point) {
     // Initialize the element
@@ -345,15 +342,15 @@ public class DashboardPanel extends JPanel {
   }
 
   /**
-   * Sets the element to use for the given field, removing the current element
-   * if one exists for that field. This is used mostly by the
+   * Sets the element to use for the given field, removing the current element if
+   * one exists for that field. This is used mostly by the
    * {@link DashboardFrame#load(java.lang.String) load(...)} method.
    *
-   * @param key the name of the field
+   * @param key     the name of the field
    * @param element the element to give to that field
-   * @param type the type of the data
-   * @param value the value of the data
-   * @param point the point to put it
+   * @param type    the type of the data
+   * @param value   the value of the data
+   * @param point   the point to put it
    */
   public void setField(String key, Widget element, DataType type, Object value, Point point) {
     removeField(key);
@@ -379,10 +376,10 @@ public class DashboardPanel extends JPanel {
   /**
    * Sets the field to use the given values.
    *
-   * @param key the key of the field
+   * @param key       the key of the field
    * @param preferred the preferred widget to use
-   * @param value the value of the field (must <b>not</b> be {@code null})
-   * @param point the point the widget should be (can be {@code null})
+   * @param value     the value of the field (must <b>not</b> be {@code null})
+   * @param point     the point the widget should be (can be {@code null})
    */
   public void setField(String key, Class<? extends Widget> preferred, Object value, Point point) {
     setField(key, preferred, DataType.getType(value), value, point);
@@ -391,22 +388,20 @@ public class DashboardPanel extends JPanel {
   /**
    * Sets the field to use the given values.
    *
-   * @param key the key of the field
+   * @param key       the key of the field
    * @param preferred the preferred widget to use
-   * @param type the type of the field
-   * @param value the value of the field (can be {@code null})
-   * @param point the point the widget should be (can be {@code null})
+   * @param type      the type of the field
+   * @param value     the value of the field (can be {@code null})
+   * @param point     the point the widget should be (can be {@code null})
    */
   @SuppressWarnings("unchecked")
-  public void setField(String key, Class<? extends Widget> preferred, final DataType type, Object
-      value, Point point) {
+  public void setField(String key, Class<? extends Widget> preferred, final DataType type, Object value, Point point) {
     Widget element = fields.get(key);
 
     if (type == null) {
       System.out.println("WARNING: has no way of handling data at field \"" + key + "\"");
       removeField(key);
-    } else if (element != null && preferred == null && (element.getType() == type
-        || element.supportsType(type))) {
+    } else if (element != null && preferred == null && (element.getType() == type || element.supportsType(type))) {
       if (element.getType() != type) {
         element.setType(type);
       }
@@ -436,16 +431,15 @@ public class DashboardPanel extends JPanel {
       } catch (InstantiationException ex) {
         System.out.println("ERROR: " + clazz.getName() + " has no default constructor!");
       } catch (IllegalAccessException ex) {
-        System.out.println("ERROR: " + clazz.getName() + " has no public default "
-            + "constructor!");
+        System.out.println("ERROR: " + clazz.getName() + " has no public default " + "constructor!");
       }
     }
   }
 
   /**
-   * Adds the field of the given name to the screen. The field does not need
-   * to be in the SmartDashboard table. This will add some default widget (for
-   * that type) with no value.
+   * Adds the field of the given name to the screen. The field does not need to be
+   * in the SmartDashboard table. This will add some default widget (for that
+   * type) with no value.
    *
    * @param key the key to add
    */
@@ -454,8 +448,8 @@ public class DashboardPanel extends JPanel {
   }
 
   /**
-   * Returns the element that covers the given point. It will return the
-   * forward most element.
+   * Returns the element that covers the given point. It will return the forward
+   * most element.
    *
    * @param point the point on the screen
    * @return the element
@@ -487,13 +481,11 @@ public class DashboardPanel extends JPanel {
     Dimension size = toPlace.getSize();
     Dimension panelBounds = getSize();
 
-    PositionLoop:
-    while (!positions.isEmpty()) {
+    PositionLoop: while (!positions.isEmpty()) {
       Point position = positions.pop();
       Rectangle area = new Rectangle(position, size);
 
-      if (area.x < 0 || area.y < 0
-          || area.x + area.width > panelBounds.width
+      if (area.x < 0 || area.y < 0 || area.x + area.width > panelBounds.width
           || area.y + area.height > panelBounds.height) {
         continue;
       }
@@ -502,9 +494,7 @@ public class DashboardPanel extends JPanel {
         if (element != toPlace && element.isObstruction()) {
           Rectangle bounds = element.getBounds();
           // Test Intersection
-          if (!(bounds.x > area.x + area.width
-              || bounds.x + bounds.width < area.x
-              || bounds.y > area.y + area.height
+          if (!(bounds.x > area.x + area.width || bounds.x + bounds.width < area.x || bounds.y > area.y + area.height
               || bounds.y + bounds.height < area.y)) {
             Point right = new Point(bounds.x + bounds.width + 1, position.y);
             if (positions.isEmpty()) {
@@ -539,25 +529,19 @@ public class DashboardPanel extends JPanel {
     try {
       element.disconnect();
     } catch (Exception e) {
-      String message = "An exception occurred while removing the "
-          + DisplayElement.getName(element.getClass())
-          + " of type " + e.getClass()
-          + ".\nThe message is:\n" + e.getMessage()
-          + "\nThe stack trace is:\n";
+      String message = "An exception occurred while removing the " + DisplayElement.getName(element.getClass())
+          + " of type " + e.getClass() + ".\nThe message is:\n" + e.getMessage() + "\nThe stack trace is:\n";
       for (StackTraceElement trace : e.getStackTrace()) {
         message += trace.toString() + "\n";
       }
-      JOptionPane.showMessageDialog(frame,
-          message,
-          "Exception When Removing Element", JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(frame, message, "Exception When Removing Element", JOptionPane.ERROR_MESSAGE);
     }
   }
 
   private class RobotListener implements ITableListener {
 
     @Override
-    public void valueChanged(final ITable source, final String key, final Object value,
-                             final boolean isNew) {
+    public void valueChanged(final ITable source, final String key, final Object value, final boolean isNew) {
       if (isNew && !frame.getPrefs().autoShowWidgets.getValue() && !fields.containsKey(key)) {
         hiddenFields.add(key);
       } else {
@@ -565,8 +549,8 @@ public class DashboardPanel extends JPanel {
           if (value instanceof ITable) {
             final ITable table = (ITable) value;
             table.addTableListenerEx(".type", new ITableListener() {
-              public void valueChanged(final ITable typeSource, final String typeKey,
-                                       final Object typeValue, final boolean typeIsNew) {
+              public void valueChanged(final ITable typeSource, final String typeKey, final Object typeValue,
+                  final boolean typeIsNew) {
                 table.removeTableListener(this);
                 SwingUtilities.invokeLater(new Runnable() {
                   public void run() {
@@ -574,8 +558,7 @@ public class DashboardPanel extends JPanel {
                   }
                 });
               }
-            }, ITable.NOTIFY_IMMEDIATE | ITable.NOTIFY_LOCAL | ITable.NOTIFY_NEW
-                | ITable.NOTIFY_UPDATE);
+            }, ITable.NOTIFY_IMMEDIATE | ITable.NOTIFY_LOCAL | ITable.NOTIFY_NEW | ITable.NOTIFY_UPDATE);
           } else {
             SwingUtilities.invokeLater(new Runnable() {
               public void run() {

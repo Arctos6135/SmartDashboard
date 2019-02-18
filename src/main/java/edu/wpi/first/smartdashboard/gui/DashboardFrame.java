@@ -36,9 +36,10 @@ import edu.wpi.first.smartdashboard.xml.SmartDashboardXMLWriter;
 import edu.wpi.first.smartdashboard.xml.XMLWidget;
 
 /**
- * This class defines the SmartDashboard window for the FRC program. It contains almost no
- * logic except for the {@link DashboardFrame#load(java.lang.String) load(...)}
- * and {@link DashboardFrame#save(java.lang.String) save(...)} method.
+ * This class defines the SmartDashboard window for the FRC program. It contains
+ * almost no logic except for the {@link DashboardFrame#load(java.lang.String)
+ * load(...)} and {@link DashboardFrame#save(java.lang.String) save(...)}
+ * method.
  *
  * @author Joe Grinstead
  */
@@ -47,9 +48,8 @@ public class DashboardFrame extends JFrame {
   private static final String TITLE = "ArctosDashboard v1.0.0 (SmartDashboard v2019.3.1) | ";
 
   /*
-   * If the menu bar is set to "hidden," then this defines what portion of the
-   * top screen is reserved for revealing the menu bar when the mouse moves
-   * over it
+   * If the menu bar is set to "hidden," then this defines what portion of the top
+   * screen is reserved for revealing the menu bar when the mouse moves over it
    */
   private static final int MENU_HEADER = 10;
   /**
@@ -62,8 +62,7 @@ public class DashboardFrame extends JFrame {
   private static final Dimension MINIMUM_SIZE = new Dimension(300, 200);
 
   public enum DisplayMode {
-    SmartDashboard,
-    LiveWindow;
+    SmartDashboard, LiveWindow;
   }
 
   private final DashboardPrefs prefs = new DashboardPrefs(this);
@@ -121,11 +120,9 @@ public class DashboardFrame extends JFrame {
       var imgStream = ClassLoader.getSystemClassLoader().getResourceAsStream("arctos1.PNG");
       BufferedImage img = ImageIO.read(imgStream);
       SwingUtilities.invokeLater(() -> setIconImage(img));
-    }
-    catch(Exception e) {
+    } catch (Exception e) {
       System.out.println("I don't care");
     }
-
 
     setLayout(new BorderLayout());
 
@@ -134,9 +131,7 @@ public class DashboardFrame extends JFrame {
     smartDashboardPanel.setName("SmartDashboard");
     liveWindowPanel = new DashboardPanel(this, Robot.getLiveWindow());
     liveWindowPanel.setName("LiveWindow");
-    mainPanel
-        = new MainPanel(new CardLayout(), smartDashboardPanel, liveWindowPanel,
-        smartDashboardPanel);
+    mainPanel = new MainPanel(new CardLayout(), smartDashboardPanel, liveWindowPanel, smartDashboardPanel);
     mainPanel.add(smartDashboardPanel, DisplayMode.SmartDashboard.toString());
     mainPanel.add(liveWindowPanel, DisplayMode.LiveWindow.toString());
     setDisplayMode(DisplayMode.SmartDashboard);
@@ -242,8 +237,7 @@ public class DashboardFrame extends JFrame {
 
   /**
    * Sets whether or not the menu should be hidden. This does not attempt to
-   * change the property setting, instead the property setting should call
-   * this.
+   * change the property setting, instead the property setting should call this.
    *
    * @param shouldHide whether or not the menu should hide
    */
@@ -287,8 +281,7 @@ public class DashboardFrame extends JFrame {
     }
   }
 
-  private void saveElements(SmartDashboardXMLWriter writer, DashboardPanel toSave) throws
-      IOException {
+  private void saveElements(SmartDashboardXMLWriter writer, DashboardPanel toSave) throws IOException {
     for (DisplayElement element : toSave.getElements()) {
       boolean isWidget = element instanceof Widget;
       assert isWidget || element instanceof StaticWidget;
@@ -301,15 +294,14 @@ public class DashboardFrame extends JFrame {
           System.err.println("Unable to save element: " + ((Widget) element).getFieldName());
           break;
         }
-        writer.beginWidget(((Widget) element).getFieldName(), ((Widget) element).getType()
-            .getName(), element.getClass().getName());
+        writer.beginWidget(((Widget) element).getFieldName(), ((Widget) element).getType().getName(),
+            element.getClass().getName());
       } else {
         writer.beginStaticWidget(element.getClass().getName());
       }
       if (element instanceof LWSubsystem) {
         for (Widget w : ((LWSubsystem) element).getWidgets()) {
-          System.out.println(
-              "   Saving " + ((LWSubsystem) element).getFieldName() + "|" + w.getFieldName());
+          System.out.println("   Saving " + ((LWSubsystem) element).getFieldName() + "|" + w.getFieldName());
           writer.addSubWidget(w.getFieldName(), w.getType().getName(), w.getClass().getName());
           writer.addSubWidgetLocation(w.getLocation());
           writer.addSubWudgetHeight(w.getHeight());
@@ -366,8 +358,7 @@ public class DashboardFrame extends JFrame {
               smartDashboardPanel.setField(e.getFieldName(), e, type, value, e.getSavedLocation());
             }
           } else {
-            smartDashboardPanel.setField(e.getFieldName(), e, widget.getType(), null, e
-                .getSavedLocation());
+            smartDashboardPanel.setField(e.getFieldName(), e, widget.getType(), null, e.getSavedLocation());
           }
         } else if (element instanceof StaticWidget) {
           StaticWidget e = (StaticWidget) element;
@@ -387,27 +378,23 @@ public class DashboardFrame extends JFrame {
           value1 = Robot.getTable().getValue(subsystem.getFieldName(), null);
           DataType type = DataType.getType(value1);
           if (DisplayElementRegistry.supportsType(subsystem.getClass(), type)) {
-            liveWindowPanel.setField(subsystem.getFieldName(), subsystem, type, value1, subsystem
-                .getSavedLocation());
+            liveWindowPanel.setField(subsystem.getFieldName(), subsystem, type, value1, subsystem.getSavedLocation());
           }
         } else {
-          liveWindowPanel.setField(subsystem.getFieldName(), subsystem, subsystem.getType(),
-              null, subsystem.getSavedLocation());
+          liveWindowPanel.setField(subsystem.getFieldName(), subsystem, subsystem.getType(), null,
+              subsystem.getSavedLocation());
         }
         for (XMLWidget component : reader.getSubwidgetMap(subsys).values()) {
           System.out.println("Adding subcomponent \"" + component.getField() + "\"");
           AbstractTableWidget w = (AbstractTableWidget) component.convertToDisplayElement();
           Object value2 = null;
-          value2
-              = Robot.getLiveWindow().getSubTable(mostRecentParent.getFieldName()).getSubTable(w
-              .getFieldName());
+          value2 = Robot.getLiveWindow().getSubTable(mostRecentParent.getFieldName()).getSubTable(w.getFieldName());
           DataType type = DataType.getType(value2);
           mostRecentParent.addWidget(w);
           w.setField(w.getFieldName(), w, type, value2, mostRecentParent, w.getSavedLocation());
           mostRecentParent.setSize(mostRecentParent.getPreferredSize());
         }
       }
-
 
       for (String field : reader.getHiddenFields()) {
         smartDashboardPanel.removeField(field);
@@ -429,18 +416,16 @@ public class DashboardFrame extends JFrame {
    * Exits the program, prompting the user to save.
    */
   public void exit() {
-    int result
-        = JOptionPane.showConfirmDialog(this, new String[]{"Do you wish to save this layout?"},
-        "Save before quitting?",
-        JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+    int result = JOptionPane.showConfirmDialog(this, new String[] { "Do you wish to save this layout?" },
+        "Save before quitting?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
     switch (result) {
-      case JOptionPane.YES_OPTION:
-        save(prefs.saveFile.getValue());
-        // fallthrough
-      case JOptionPane.NO_OPTION:
-        System.exit(0);
-        // fallthrough
-      default: // Do Nothing (they called cancel)
+    case JOptionPane.YES_OPTION:
+      save(prefs.saveFile.getValue());
+      // fallthrough
+    case JOptionPane.NO_OPTION:
+      System.exit(0);
+      // fallthrough
+    default: // Do Nothing (they called cancel)
     }
   }
 
