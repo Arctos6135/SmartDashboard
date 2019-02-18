@@ -1,18 +1,26 @@
 package edu.wpi.first.smartdashboard.gui.elements;
 
+import java.awt.image.BufferedImage;
+
 import javax.imageio.ImageIO;
 
 public class ArctosLogo extends edu.wpi.first.smartdashboard.gui.elements.Image {
-    @Override
-    public void init() {
-        super.init();
+
+    public static BufferedImage arctosLogo;
+    static {
         try {
           var imgStream = ClassLoader.getSystemClassLoader().getResourceAsStream("arctos1.PNG");
-          image = ImageIO.read(imgStream);
+          arctosLogo = ImageIO.read(imgStream);
         }
         catch(Exception e) {
           System.out.println("I don't care");
         }
+    }
+
+    @Override
+    public void init() {
+        super.init();
+        image = arctosLogo;
 
         aspectKept.setValue(true);
         propertyChanged(aspectKept);

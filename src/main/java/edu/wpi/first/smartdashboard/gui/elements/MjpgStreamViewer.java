@@ -39,7 +39,7 @@ public abstract class MjpgStreamViewer extends StaticWidget {
   private int fpsCounter = 0;
   private long bpsAccum = 0;
   private double lastMbps = 0;
-  private BufferedImage imageToDraw;
+  protected BufferedImage imageToDraw;
   private BGThread bgThread = new BGThread();
   private boolean cameraChanged = true;
 
@@ -92,7 +92,7 @@ public abstract class MjpgStreamViewer extends StaticWidget {
   }
 
   @Override
-  protected final void paintComponent(Graphics g) {
+  protected void paintComponent(Graphics g) {
     BufferedImage drawnImage = imageToDraw;
 
     if (drawnImage != null) {
