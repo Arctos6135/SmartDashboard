@@ -44,7 +44,7 @@ import edu.wpi.first.smartdashboard.xml.XMLWidget;
  */
 public class DashboardFrame extends JFrame {
 
-  private static final String TITLE = "ArctosDashboard | ";
+  private static final String TITLE = "ArctosDashboard v1.0.0 (SmartDashboard v2019.3.1) | ";
 
   /*
    * If the menu bar is set to "hidden," then this defines what portion of the
