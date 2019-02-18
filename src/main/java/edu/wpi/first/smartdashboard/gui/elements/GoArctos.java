@@ -1,5 +1,7 @@
 package edu.wpi.first.smartdashboard.gui.elements;
 
+import java.awt.Font;
+
 import edu.wpi.first.smartdashboard.properties.IntegerProperty;
 import edu.wpi.first.smartdashboard.properties.Property;
 
@@ -15,6 +17,7 @@ public class GoArctos extends Label {
     @Override
     public void init() {
         super.init();
+        label.setFont(label.getFont().deriveFont(Font.BOLD, (float) 30.0));
         text.setValue("GO ARCTOS");
         propertyChanged(text);
     }

@@ -17,7 +17,7 @@ public class Label extends StaticWidget {
   public final MultiProperty horizontal = new MultiProperty(this, "Horizontal Alignment");
   public final MultiProperty vertical = new MultiProperty(this, "Vertical Alignment");
 
-  private JLabel label;
+  protected JLabel label;
 
   public Label() {
     horizontal.add("Left", SwingConstants.LEFT);
