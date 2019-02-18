@@ -4,8 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 
 import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
 
-import edu.wpi.first.smartdashboard.ArctosLabel;
 import edu.wpi.first.smartdashboard.gui.Widget;
 import edu.wpi.first.smartdashboard.properties.ColorProperty;
 import edu.wpi.first.smartdashboard.properties.IntegerProperty;
@@ -32,7 +32,7 @@ public class FormattedField extends Widget {
   public void init() {
     setLayout(new BorderLayout());
 
-    final ArctosLabel nameLabel = new ArctosLabel(getFieldName());
+    final JLabel nameLabel = new JLabel(getFieldName());
     valueField = new JFormattedTextField();
 
     update(foreground, valueField.getForeground());

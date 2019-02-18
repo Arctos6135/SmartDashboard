@@ -6,10 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import edu.wpi.first.smartdashboard.ArctosLabel;
 import edu.wpi.first.smartdashboard.gui.elements.bindings.AbstractTableWidget;
 import edu.wpi.first.smartdashboard.properties.ColorProperty;
 import edu.wpi.first.smartdashboard.properties.Property;
@@ -29,7 +29,7 @@ public class Command extends AbstractTableWidget {
       = new ColorProperty(this, "Start Button Color", new Color(32, 134, 32));
   public final ColorProperty cancelBackground
       = new ColorProperty(this, "Cancel Button Color", new Color(243, 32, 32));
-  private ArctosLabel name;
+  private JLabel name;
   private JPanel buttonPanel;
   private CardLayout layout;
   private JButton start;
@@ -66,7 +66,7 @@ public class Command extends AbstractTableWidget {
 
     buttonPanel.add(cancel, CANCEL_CARD);
 
-    name = new ArctosLabel(getFieldName());
+    name = new JLabel(getFieldName());
     add(name);
     add(buttonPanel);
   }

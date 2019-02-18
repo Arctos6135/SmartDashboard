@@ -1,11 +1,12 @@
 package edu.wpi.first.smartdashboard.livewindow.elements;
 
+import javax.swing.BoxLayout;
+
 import edu.wpi.first.smartdashboard.gui.elements.bindings.AbstractTableWidget;
 import edu.wpi.first.smartdashboard.properties.Property;
 import edu.wpi.first.smartdashboard.types.DataType;
 import edu.wpi.first.smartdashboard.types.named.DigitalInputType;
 import edu.wpi.first.wpilibj.tables.ITableListener;
-import javax.swing.BoxLayout;
 
 /**
  * Displays a digital value (on/off). Useful for limit switches.

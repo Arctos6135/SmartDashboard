@@ -4,7 +4,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
-import edu.wpi.first.smartdashboard.ArctosLabel;
+import javax.swing.JLabel;
+
 import edu.wpi.first.smartdashboard.gui.elements.bindings.AbstractTableWidget;
 import edu.wpi.first.smartdashboard.properties.Property;
 import edu.wpi.first.smartdashboard.types.DataType;
@@ -22,9 +23,9 @@ public class ThreeAxisAccelerometer extends AbstractTableWidget implements ITabl
   private final UneditableNumberField x = new UneditableNumberField();
   private final UneditableNumberField y = new UneditableNumberField();
   private final UneditableNumberField z = new UneditableNumberField();
-  private ArctosLabel xLabel;
-  private ArctosLabel yLabel;
-  private ArctosLabel zLabel;
+  private JLabel xLabel;
+  private JLabel yLabel;
+  private JLabel zLabel;
 
   /**
    * @inheritdoc
@@ -38,7 +39,7 @@ public class ThreeAxisAccelerometer extends AbstractTableWidget implements ITabl
 
     c.gridy = 1;
     c.gridx = 0;
-    xLabel = new ArctosLabel("X");
+    xLabel = new JLabel("X");
     add(xLabel, c);
     c.gridx = 1;
     x.setFocusable(false);
@@ -48,7 +49,7 @@ public class ThreeAxisAccelerometer extends AbstractTableWidget implements ITabl
 
     c.gridy = 2;
     c.gridx = 0;
-    yLabel = new ArctosLabel("Y");
+    yLabel = new JLabel("Y");
     add(yLabel, c);
     c.gridx = 1;
     y.setFocusable(false);
@@ -58,7 +59,7 @@ public class ThreeAxisAccelerometer extends AbstractTableWidget implements ITabl
 
     c.gridy = 3;
     c.gridx = 0;
-    zLabel = new ArctosLabel("Z");
+    zLabel = new JLabel("Z");
     add(zLabel, c);
     c.gridx = 1;
     z.setFocusable(false);

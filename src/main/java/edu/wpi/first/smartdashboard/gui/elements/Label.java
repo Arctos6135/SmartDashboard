@@ -2,9 +2,9 @@ package edu.wpi.first.smartdashboard.gui.elements;
 
 import java.awt.BorderLayout;
 
+import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import edu.wpi.first.smartdashboard.ArctosLabel;
 import edu.wpi.first.smartdashboard.gui.StaticWidget;
 import edu.wpi.first.smartdashboard.properties.MultiProperty;
 import edu.wpi.first.smartdashboard.properties.Property;
@@ -19,7 +19,7 @@ public class Label extends StaticWidget {
   public final MultiProperty horizontal = new MultiProperty(this, "Horizontal Alignment");
   public final MultiProperty vertical = new MultiProperty(this, "Vertical Alignment");
 
-  protected ArctosLabel label;
+  protected JLabel label;
 
   public Label() {
     horizontal.add("Left", SwingConstants.LEFT);
@@ -37,7 +37,7 @@ public class Label extends StaticWidget {
   public void init() {
     setLayout(new BorderLayout());
 
-    label = new ArctosLabel(text.getValue());
+    label = new JLabel(text.getValue());
 
     label.setHorizontalAlignment((Integer) horizontal.getValue());
     label.setVerticalAlignment((Integer) vertical.getValue());

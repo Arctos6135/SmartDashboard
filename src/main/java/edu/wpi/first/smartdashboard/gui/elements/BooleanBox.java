@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import edu.wpi.first.smartdashboard.ArctosLabel;
 import edu.wpi.first.smartdashboard.gui.elements.bindings.AbstractValueWidget;
 import edu.wpi.first.smartdashboard.properties.ColorProperty;
 import edu.wpi.first.smartdashboard.properties.Property;
@@ -30,7 +30,7 @@ public class BooleanBox extends AbstractValueWidget {
   public void init() {
     setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
-    ArctosLabel nameLabel = new ArctosLabel(getFieldName());
+    JLabel nameLabel = new JLabel(getFieldName());
     valueField = new JPanel();
     valueField.setPreferredSize(new Dimension(10, 10));
 

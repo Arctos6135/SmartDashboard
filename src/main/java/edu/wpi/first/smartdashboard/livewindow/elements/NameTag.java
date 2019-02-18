@@ -8,17 +8,18 @@ package edu.wpi.first.smartdashboard.livewindow.elements;
 import java.awt.Color;
 import java.awt.Font;
 
-import edu.wpi.first.smartdashboard.ArctosLabel;
+import javax.swing.JLabel;
+
 import edu.wpi.first.smartdashboard.gui.elements.bindings.AbstractTableWidget;
 
 /**
- * A custom ArctosLabel implementation that's used for titles
+ * A custom JLabel implementation that's used for titles
  * of individual components within a subsystem.
  *
  * @author Sam
  * @see AbstractTableWidget#nameTag
  */
-public class NameTag extends ArctosLabel {
+public class NameTag extends JLabel {
 
   public NameTag(String text) {
     super(text);

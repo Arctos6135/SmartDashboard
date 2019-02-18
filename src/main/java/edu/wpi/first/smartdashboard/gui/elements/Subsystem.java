@@ -1,8 +1,8 @@
 package edu.wpi.first.smartdashboard.gui.elements;
 
 import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 
-import edu.wpi.first.smartdashboard.ArctosLabel;
 import edu.wpi.first.smartdashboard.gui.elements.bindings.AbstractTableWidget;
 import edu.wpi.first.smartdashboard.gui.elements.bindings.BooleanBindable;
 import edu.wpi.first.smartdashboard.gui.elements.bindings.StringBindable;
@@ -24,7 +24,7 @@ public class Subsystem extends AbstractTableWidget implements ITableListener {
   private SubsystemCommandField valueField;
 
   public void init() {
-    final ArctosLabel nameLabel = new ArctosLabel(getFieldName());
+    final JLabel nameLabel = new JLabel(getFieldName());
     valueField = new SubsystemCommandField();
 
     update(background, valueField.getBackground());

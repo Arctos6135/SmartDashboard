@@ -1,14 +1,19 @@
 package edu.wpi.first.smartdashboard.gui;
 
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.geom.AffineTransform;
 import java.io.File;
 import java.util.Set;
 
 import javax.swing.AbstractAction;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -20,6 +25,7 @@ import javax.swing.event.MenuListener;
 import org.jfree.ui.ExtensionFileFilter;
 
 import edu.wpi.first.smartdashboard.SmartDashboard;
+import edu.wpi.first.smartdashboard.gui.elements.GoArctos;
 import edu.wpi.first.smartdashboard.livewindow.elements.Controller;
 import edu.wpi.first.smartdashboard.livewindow.elements.LWSubsystem;
 import edu.wpi.first.smartdashboard.robot.Robot;
@@ -34,6 +40,8 @@ import edu.wpi.first.wpilibj.tables.ITableListener;
  * @author Joe Grinstead
  */
 public class DashboardMenu extends JMenuBar {
+
+  public static Font defaultFont;
 
   /**
    * Creates a menu for the given panel.
@@ -247,16 +255,46 @@ public class DashboardMenu extends JMenuBar {
 
     viewMenu.add(removeUnusedMenu);
 
+    defaultFont = new JLabel().getFont();
     JCheckBoxMenuItem arctosify = new JCheckBoxMenuItem("Arctosify");
     arctosify.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         DashboardPanel.arctosify = arctosify.isSelected();
-        SmartDashboard.frame.smartDashboardPanel.repaint();
+        if(arctosify.isSelected()) {
+          setFontAll(SmartDashboard.frame, lemonMilk);
+        }
+        else if(defaultFont != null) {
+          setFontAll(SmartDashboard.frame, defaultFont);
+        }
+        SmartDashboard.frame.repaint();
       }
     });
     viewMenu.add(arctosify);
 
     add(fileMenu);
     add(viewMenu);
+  }
+  
+  public static Font lemonMilk;
+  static {
+      try {
+          AffineTransform squish = AffineTransform.getScaleInstance(0.75, 1);
+          lemonMilk = Font.createFont(Font.TRUETYPE_FONT, ClassLoader.getSystemClassLoader().getResourceAsStream("lemon_milk/LemonMilklight.ttf"))
+                  .deriveFont(12.0f).deriveFont(squish);
+      }
+      catch(Exception e) {
+          lemonMilk = new Font("Comic Sans MS", Font.BOLD, 12);
+      }
+  }
+  public static void setFontAll(Component comp, Font font) {
+    // Special font for GoArctos!
+    if(!(comp instanceof GoArctos)) {
+      comp.setFont(font);
+    }
+    if(comp instanceof Container) {
+      for(Component child : ((Container) comp).getComponents()) {
+        setFontAll(child, font);
+      }
+    }
   }
 }

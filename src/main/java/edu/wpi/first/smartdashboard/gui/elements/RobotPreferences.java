@@ -19,6 +19,7 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -30,7 +31,6 @@ import javax.swing.table.AbstractTableModel;
 import org.jfree.ui.ExtensionFileFilter;
 
 import edu.wpi.first.networktables.PersistentException;
-import edu.wpi.first.smartdashboard.ArctosLabel;
 import edu.wpi.first.smartdashboard.gui.StaticWidget;
 import edu.wpi.first.smartdashboard.properties.Property;
 import edu.wpi.first.smartdashboard.robot.Robot;
@@ -748,19 +748,19 @@ public class RobotPreferences extends StaticWidget implements ITableListener {
       setLayout(new GridBagLayout());
       GridBagConstraints c = new GridBagConstraints();
 
-      add(new ArctosLabel("Key: "), c);
+      add(new JLabel("Key: "), c);
       c.gridx = 1;
       add(keyField = new JTextField(10), c);
 
       c.gridx = 0;
       c.gridy = 1;
-      add(new ArctosLabel("Type: "), c);
+      add(new JLabel("Type: "), c);
       c.gridx = 1;
       add(typeComboBox = new JComboBox<String>(typeNames), c);
 
       c.gridx = 0;
       c.gridy = 2;
-      add(new ArctosLabel("Value: "), c);
+      add(new JLabel("Value: "), c);
       c.gridx = 1;
       add(valueField = new JTextField(10), c);
 

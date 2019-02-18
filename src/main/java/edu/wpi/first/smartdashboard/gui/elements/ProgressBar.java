@@ -2,7 +2,8 @@ package edu.wpi.first.smartdashboard.gui.elements;
 
 import java.awt.BorderLayout;
 
-import edu.wpi.first.smartdashboard.ArctosLabel;
+import javax.swing.JLabel;
+
 import edu.wpi.first.smartdashboard.gui.elements.bindings.AbstractValueWidget;
 import edu.wpi.first.smartdashboard.properties.ColorProperty;
 import edu.wpi.first.smartdashboard.properties.DoubleProperty;
@@ -33,7 +34,7 @@ public class ProgressBar extends AbstractValueWidget {
     setNumberBinding(progressBar);
 
     setLayout(new BorderLayout());
-    add(new ArctosLabel(getFieldName()), BorderLayout.PAGE_START);
+    add(new JLabel(getFieldName()), BorderLayout.PAGE_START);
     add(progressBar, BorderLayout.CENTER);
 
 

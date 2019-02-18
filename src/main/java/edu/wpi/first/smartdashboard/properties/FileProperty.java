@@ -5,13 +5,12 @@ import java.io.File;
 
 import javax.swing.AbstractCellEditor;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
 import org.jfree.ui.ExtensionFileFilter;
-
-import edu.wpi.first.smartdashboard.ArctosLabel;
 
 /**
  * @author Joe Grinstead
@@ -62,11 +61,11 @@ public class FileProperty extends GenericProperty<String> {
   private class FileTableCellEditor extends AbstractCellEditor implements TableCellEditor {
 
     private Component c;
-    private ArctosLabel label;
+    private JLabel label;
 
     public FileTableCellEditor(Component c) {
       this.c = c;
-      label = new ArctosLabel();
+      label = new JLabel();
     }
 
     public Object getCellEditorValue() {

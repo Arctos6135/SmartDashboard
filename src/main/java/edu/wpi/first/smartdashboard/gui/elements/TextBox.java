@@ -1,9 +1,9 @@
 package edu.wpi.first.smartdashboard.gui.elements;
 
 import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import edu.wpi.first.smartdashboard.ArctosLabel;
 import edu.wpi.first.smartdashboard.gui.elements.bindings.AbstractValueWidget;
 import edu.wpi.first.smartdashboard.properties.BooleanProperty;
 import edu.wpi.first.smartdashboard.properties.ColorProperty;
@@ -29,7 +29,7 @@ public class TextBox extends AbstractValueWidget {
   public void init() {
     setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
-    ArctosLabel nameLabel = new ArctosLabel(getFieldName());
+    JLabel nameLabel = new JLabel(getFieldName());
 
     if (getType().isChildOf(DataType.BOOLEAN)) {
       valueField = new EditableBooleanValueField(getFieldName());
@@ -47,7 +47,6 @@ public class TextBox extends AbstractValueWidget {
 
     valueField.setEditable(editable.getValue());
     valueField.setColumns(10);
-    valueField.setFont(ArctosLabel.lemonMilk);
 
     add(nameLabel);
     add(valueField);

@@ -1,17 +1,19 @@
 package edu.wpi.first.smartdashboard.livewindow.elements;
 
+import java.awt.CardLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionListener;
+
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+
 import edu.wpi.first.smartdashboard.gui.elements.PIDEditor;
 import edu.wpi.first.smartdashboard.gui.elements.bindings.AbstractTableWidget;
 import edu.wpi.first.smartdashboard.properties.Property;
 import edu.wpi.first.smartdashboard.types.DataType;
 import edu.wpi.first.smartdashboard.types.named.CANSpeedControllerType;
 import edu.wpi.first.wpilibj.tables.ITable;
-import java.awt.CardLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.event.ActionListener;
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
 
 /**
  * @author Sam Carlberg

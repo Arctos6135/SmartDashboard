@@ -10,10 +10,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import edu.wpi.first.smartdashboard.ArctosLabel;
 import edu.wpi.first.smartdashboard.gui.Widget;
 import edu.wpi.first.smartdashboard.properties.Property;
 import edu.wpi.first.smartdashboard.types.DataType;
@@ -30,11 +30,11 @@ public class Scheduler extends Widget {
   private static final String NO_COMMAND_CARD = "No Command";
   private static final String COMMAND_CARD = "Commands";
   private int count = 0;
-  private ArctosLabel noCommands;
+  private JLabel noCommands;
   private JPanel commandLabels;
   private JPanel cancelButtons;
   private JPanel commandPanel;
-  private List<ArctosLabel> labels;
+  private List<JLabel> labels;
   private List<JButton> buttons;
   private ITable table;
   private GridLayout commandLayout;
@@ -66,9 +66,9 @@ public class Scheduler extends Widget {
             // Update displayed commands
             for (int i = 0; i < commands.size(); i++) {
               if (i >= labels.size()) {
-                labels.add(new ArctosLabel());
+                labels.add(new JLabel());
               }
-              ArctosLabel label = labels.get(i);
+              JLabel label = labels.get(i);
               label.setText(commands.get(i));
 
               if (i >= buttons.size()) {
@@ -128,7 +128,7 @@ public class Scheduler extends Widget {
   public void init() {
     setLayout(cardLayout = new CardLayout());
 
-    labels = new ArrayList<ArctosLabel>();
+    labels = new ArrayList<JLabel>();
     buttons = new ArrayList<JButton>();
 
     commandPanel = new JPanel();
@@ -148,8 +148,8 @@ public class Scheduler extends Widget {
 
     add(commandPanel, COMMAND_CARD);
 
-    noCommands = new ArctosLabel("No commands running.");
-    noCommands.setHorizontalAlignment(ArctosLabel.CENTER);
+    noCommands = new JLabel("No commands running.");
+    noCommands.setHorizontalAlignment(JLabel.CENTER);
     add(noCommands, NO_COMMAND_CARD);
 
     cardLayout.show(this, NO_COMMAND_CARD);
