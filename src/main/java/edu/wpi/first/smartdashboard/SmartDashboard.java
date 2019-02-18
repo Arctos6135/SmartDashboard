@@ -37,7 +37,7 @@ public class SmartDashboard {
   }
 
 
-  private static DashboardFrame frame;
+  public static DashboardFrame frame;
 
   /**
    * Starts the program

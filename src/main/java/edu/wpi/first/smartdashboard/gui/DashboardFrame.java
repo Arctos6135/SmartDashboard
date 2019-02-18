@@ -70,9 +70,9 @@ public class DashboardFrame extends JFrame {
   /**
    * The content of the frame
    */
-  private final DashboardPanel smartDashboardPanel;
-  private final DashboardPanel liveWindowPanel;
-  private final MainPanel mainPanel;
+  public final DashboardPanel smartDashboardPanel;
+  public final DashboardPanel liveWindowPanel;
+  public final MainPanel mainPanel;
   private DisplayMode displayMode = DisplayMode.SmartDashboard;
   /**
    * The menu bar

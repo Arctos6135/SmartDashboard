@@ -1,14 +1,10 @@
 package edu.wpi.first.smartdashboard.gui;
 
-import edu.wpi.first.smartdashboard.livewindow.elements.LWSubsystem;
-import edu.wpi.first.smartdashboard.types.DataType;
-import edu.wpi.first.smartdashboard.types.DisplayElementRegistry;
-import edu.wpi.first.smartdashboard.types.NamedDataType;
-import edu.wpi.first.wpilibj.tables.ITable;
-import edu.wpi.first.wpilibj.tables.ITableListener;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.LayoutManager;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -22,9 +18,18 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.Stack;
+
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+
+import edu.wpi.first.smartdashboard.livewindow.elements.LWSubsystem;
+import edu.wpi.first.smartdashboard.types.DataType;
+import edu.wpi.first.smartdashboard.types.DisplayElementRegistry;
+import edu.wpi.first.smartdashboard.types.NamedDataType;
+import edu.wpi.first.wpilibj.tables.ITable;
+import edu.wpi.first.wpilibj.tables.ITableListener;
 
 /**
  * This is the main panel, it sits within the {@link DashboardFrame} and
@@ -36,6 +41,27 @@ import javax.swing.SwingUtilities;
  */
 public class DashboardPanel extends JPanel {
 
+  public static Image arctosLogo;
+  static {
+    try {
+      var imgStream = ClassLoader.getSystemClassLoader().getResourceAsStream("arctos2.PNG");
+      arctosLogo = ImageIO.read(imgStream);
+    }
+    catch(Exception e) {
+      System.out.println("I don't care");
+    }
+  }
+
+  public static class BackPane extends JPanel {
+    @Override
+    protected void paintComponent(Graphics g) {
+    System.out.println("Paint component");
+    super.paintComponent(g);
+    if(arctosify) 
+        g.drawImage(arctosLogo, 0, 0, getWidth(), getHeight(), null);
+    }
+  }
+
   /**
    * We use a glass pane technique for editable mode
    */
@@ -43,7 +69,7 @@ public class DashboardPanel extends JPanel {
   /**
    * This panel contains everything except the glass pane
    */
-  private JPanel backPane = new JPanel();
+  private JPanel backPane = new BackPane();
   /**
    * All the elements currently being displayed
    */
@@ -67,6 +93,8 @@ public class DashboardPanel extends JPanel {
   private final ArrayList<LWSubsystem> subsystems = new ArrayList<LWSubsystem>();
   private final DashboardFrame frame;
   private final ITable table;
+
+  public static boolean arctosify = false;
 
   /**
    * Instantiates the panel

@@ -1,16 +1,11 @@
 package edu.wpi.first.smartdashboard.gui;
 
-import edu.wpi.first.smartdashboard.livewindow.elements.Controller;
-import edu.wpi.first.smartdashboard.livewindow.elements.LWSubsystem;
-import edu.wpi.first.smartdashboard.robot.Robot;
-import edu.wpi.first.smartdashboard.types.DisplayElementRegistry;
-import edu.wpi.first.wpilibj.tables.ITable;
-import edu.wpi.first.wpilibj.tables.ITableListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.Set;
+
 import javax.swing.AbstractAction;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFileChooser;
@@ -21,7 +16,16 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
+
 import org.jfree.ui.ExtensionFileFilter;
+
+import edu.wpi.first.smartdashboard.SmartDashboard;
+import edu.wpi.first.smartdashboard.livewindow.elements.Controller;
+import edu.wpi.first.smartdashboard.livewindow.elements.LWSubsystem;
+import edu.wpi.first.smartdashboard.robot.Robot;
+import edu.wpi.first.smartdashboard.types.DisplayElementRegistry;
+import edu.wpi.first.wpilibj.tables.ITable;
+import edu.wpi.first.wpilibj.tables.ITableListener;
 
 /**
  * This is the menu bar on top of the window. It can be set to hide
@@ -242,6 +246,15 @@ public class DashboardMenu extends JMenuBar {
     });
 
     viewMenu.add(removeUnusedMenu);
+
+    JCheckBoxMenuItem arctosify = new JCheckBoxMenuItem("Arctosify");
+    arctosify.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        DashboardPanel.arctosify = arctosify.isSelected();
+        SmartDashboard.frame.smartDashboardPanel.repaint();
+      }
+    });
+    viewMenu.add(arctosify);
 
     add(fileMenu);
     add(viewMenu);
