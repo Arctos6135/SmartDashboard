@@ -13,6 +13,9 @@ public class ArctosLogo extends edu.wpi.first.smartdashboard.gui.elements.Image 
         catch(Exception e) {
           System.out.println("I don't care");
         }
+
+        aspectKept.setValue(true);
+        propertyChanged(aspectKept);
         revalidate();
         repaint();
     }
