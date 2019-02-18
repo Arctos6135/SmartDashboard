@@ -1,12 +1,5 @@
 package edu.wpi.first.smartdashboard.gui.elements;
 
-import edu.wpi.first.networktables.PersistentException;
-import edu.wpi.first.smartdashboard.gui.StaticWidget;
-import edu.wpi.first.smartdashboard.properties.Property;
-import edu.wpi.first.smartdashboard.robot.Robot;
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
-import edu.wpi.first.wpilibj.tables.ITable;
-import edu.wpi.first.wpilibj.tables.ITableListener;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -19,13 +12,13 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -33,7 +26,17 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
+
 import org.jfree.ui.ExtensionFileFilter;
+
+import edu.wpi.first.networktables.PersistentException;
+import edu.wpi.first.smartdashboard.ArctosLabel;
+import edu.wpi.first.smartdashboard.gui.StaticWidget;
+import edu.wpi.first.smartdashboard.properties.Property;
+import edu.wpi.first.smartdashboard.robot.Robot;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.tables.ITable;
+import edu.wpi.first.wpilibj.tables.ITableListener;
 
 /**
  * @author Joe Grinstead
@@ -745,19 +748,19 @@ public class RobotPreferences extends StaticWidget implements ITableListener {
       setLayout(new GridBagLayout());
       GridBagConstraints c = new GridBagConstraints();
 
-      add(new JLabel("Key: "), c);
+      add(new ArctosLabel("Key: "), c);
       c.gridx = 1;
       add(keyField = new JTextField(10), c);
 
       c.gridx = 0;
       c.gridy = 1;
-      add(new JLabel("Type: "), c);
+      add(new ArctosLabel("Type: "), c);
       c.gridx = 1;
       add(typeComboBox = new JComboBox<String>(typeNames), c);
 
       c.gridx = 0;
       c.gridy = 2;
-      add(new JLabel("Value: "), c);
+      add(new ArctosLabel("Value: "), c);
       c.gridx = 1;
       add(valueField = new JTextField(10), c);
 

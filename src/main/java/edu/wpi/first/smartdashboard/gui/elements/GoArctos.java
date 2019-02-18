@@ -17,7 +17,7 @@ public class GoArctos extends Label {
     @Override
     public void init() {
         super.init();
-        label.setFont(label.getFont().deriveFont(Font.BOLD, (float) 30.0));
+        label.setFont(label.getFont().deriveFont(30.0f));
         text.setValue("GO ARCTOS");
         propertyChanged(text);
     }

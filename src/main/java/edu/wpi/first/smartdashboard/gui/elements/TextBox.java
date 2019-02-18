@@ -1,13 +1,14 @@
 package edu.wpi.first.smartdashboard.gui.elements;
 
+import javax.swing.BoxLayout;
+import javax.swing.JTextField;
+
+import edu.wpi.first.smartdashboard.ArctosLabel;
 import edu.wpi.first.smartdashboard.gui.elements.bindings.AbstractValueWidget;
 import edu.wpi.first.smartdashboard.properties.BooleanProperty;
 import edu.wpi.first.smartdashboard.properties.ColorProperty;
 import edu.wpi.first.smartdashboard.properties.Property;
 import edu.wpi.first.smartdashboard.types.DataType;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 /**
  * Implements a simple text box UI element with a name label.
@@ -28,7 +29,7 @@ public class TextBox extends AbstractValueWidget {
   public void init() {
     setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
-    JLabel nameLabel = new JLabel(getFieldName());
+    ArctosLabel nameLabel = new ArctosLabel(getFieldName());
 
     if (getType().isChildOf(DataType.BOOLEAN)) {
       valueField = new EditableBooleanValueField(getFieldName());
@@ -46,6 +47,7 @@ public class TextBox extends AbstractValueWidget {
 
     valueField.setEditable(editable.getValue());
     valueField.setColumns(10);
+    valueField.setFont(ArctosLabel.lemonMilk);
 
     add(nameLabel);
     add(valueField);

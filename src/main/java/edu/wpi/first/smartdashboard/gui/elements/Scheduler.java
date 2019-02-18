@@ -1,11 +1,5 @@
 package edu.wpi.first.smartdashboard.gui.elements;
 
-import edu.wpi.first.smartdashboard.gui.Widget;
-import edu.wpi.first.smartdashboard.properties.Property;
-import edu.wpi.first.smartdashboard.types.DataType;
-import edu.wpi.first.smartdashboard.types.named.SchedulerType;
-import edu.wpi.first.wpilibj.tables.ITable;
-import edu.wpi.first.wpilibj.tables.ITableListener;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.GridLayout;
@@ -14,10 +8,18 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+
+import edu.wpi.first.smartdashboard.ArctosLabel;
+import edu.wpi.first.smartdashboard.gui.Widget;
+import edu.wpi.first.smartdashboard.properties.Property;
+import edu.wpi.first.smartdashboard.types.DataType;
+import edu.wpi.first.smartdashboard.types.named.SchedulerType;
+import edu.wpi.first.wpilibj.tables.ITable;
+import edu.wpi.first.wpilibj.tables.ITableListener;
 
 /**
  * @author Jeff Copeland
@@ -28,11 +30,11 @@ public class Scheduler extends Widget {
   private static final String NO_COMMAND_CARD = "No Command";
   private static final String COMMAND_CARD = "Commands";
   private int count = 0;
-  private JLabel noCommands;
+  private ArctosLabel noCommands;
   private JPanel commandLabels;
   private JPanel cancelButtons;
   private JPanel commandPanel;
-  private List<JLabel> labels;
+  private List<ArctosLabel> labels;
   private List<JButton> buttons;
   private ITable table;
   private GridLayout commandLayout;
@@ -64,9 +66,9 @@ public class Scheduler extends Widget {
             // Update displayed commands
             for (int i = 0; i < commands.size(); i++) {
               if (i >= labels.size()) {
-                labels.add(new JLabel());
+                labels.add(new ArctosLabel());
               }
-              JLabel label = labels.get(i);
+              ArctosLabel label = labels.get(i);
               label.setText(commands.get(i));
 
               if (i >= buttons.size()) {
@@ -126,7 +128,7 @@ public class Scheduler extends Widget {
   public void init() {
     setLayout(cardLayout = new CardLayout());
 
-    labels = new ArrayList<JLabel>();
+    labels = new ArrayList<ArctosLabel>();
     buttons = new ArrayList<JButton>();
 
     commandPanel = new JPanel();
@@ -146,8 +148,8 @@ public class Scheduler extends Widget {
 
     add(commandPanel, COMMAND_CARD);
 
-    noCommands = new JLabel("No commands running.");
-    noCommands.setHorizontalAlignment(JLabel.CENTER);
+    noCommands = new ArctosLabel("No commands running.");
+    noCommands.setHorizontalAlignment(ArctosLabel.CENTER);
     add(noCommands, NO_COMMAND_CARD);
 
     cardLayout.show(this, NO_COMMAND_CARD);

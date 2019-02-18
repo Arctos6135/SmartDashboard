@@ -1,14 +1,16 @@
 package edu.wpi.first.smartdashboard.gui.elements;
 
+import java.awt.BorderLayout;
+import java.awt.Font;
+
+import javax.swing.JFormattedTextField;
+
+import edu.wpi.first.smartdashboard.ArctosLabel;
 import edu.wpi.first.smartdashboard.gui.Widget;
 import edu.wpi.first.smartdashboard.properties.ColorProperty;
 import edu.wpi.first.smartdashboard.properties.IntegerProperty;
 import edu.wpi.first.smartdashboard.properties.Property;
 import edu.wpi.first.smartdashboard.types.DataType;
-import java.awt.BorderLayout;
-import java.awt.Font;
-import javax.swing.JFormattedTextField;
-import javax.swing.JLabel;
 
 /**
  * Implements a simple text box UI element with a name label.
@@ -30,7 +32,7 @@ public class FormattedField extends Widget {
   public void init() {
     setLayout(new BorderLayout());
 
-    final JLabel nameLabel = new JLabel(getFieldName());
+    final ArctosLabel nameLabel = new ArctosLabel(getFieldName());
     valueField = new JFormattedTextField();
 
     update(foreground, valueField.getForeground());

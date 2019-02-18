@@ -5,6 +5,14 @@
 
 package edu.wpi.first.smartdashboard.livewindow.elements;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+
+import edu.wpi.first.smartdashboard.ArctosLabel;
 import edu.wpi.first.smartdashboard.gui.elements.bindings.AbstractTableWidget;
 import edu.wpi.first.smartdashboard.gui.elements.bindings.BooleanBindable;
 import edu.wpi.first.smartdashboard.properties.Property;
@@ -12,12 +20,6 @@ import edu.wpi.first.smartdashboard.types.DataType;
 import edu.wpi.first.smartdashboard.types.named.EncoderType;
 import edu.wpi.first.smartdashboard.types.named.GearToothSensorType;
 import edu.wpi.first.smartdashboard.types.named.QuadratureEncoderType;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 
 /**
  * Displays data from an Encoder. This displays
@@ -29,9 +31,9 @@ public class EncoderDisplay extends AbstractTableWidget {
   public static final DataType[] TYPES
       = {QuadratureEncoderType.get(), EncoderType.get(), GearToothSensorType.get()};
 
-  private final JLabel speedTag = new JLabel("Speed");
-  private final JLabel distanceTag = new JLabel("Distance");
-  private final JLabel DPTTag = new JLabel("Distance per Tick");
+  private final ArctosLabel speedTag = new ArctosLabel("Speed");
+  private final ArctosLabel distanceTag = new ArctosLabel("Distance");
+  private final ArctosLabel DPTTag = new ArctosLabel("Distance per Tick");
 
   /**
    * Displays the speed of the Encoder.
@@ -97,10 +99,10 @@ public class EncoderDisplay extends AbstractTableWidget {
     add(zero, c);
     c.gridx = 0;
     c.weightx = 0;
-    add(new JLabel("Reversed"), c);
+    add(new ArctosLabel("Reversed"), c);
     c.gridx = 1;
     c.weightx = 10000;
-    reversed.setAlignmentX(JLabel.LEFT_ALIGNMENT);
+    reversed.setAlignmentX(ArctosLabel.LEFT_ALIGNMENT);
     add(reversed, c);
 
   }

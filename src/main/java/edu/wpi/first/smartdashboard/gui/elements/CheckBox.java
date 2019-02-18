@@ -1,11 +1,12 @@
 package edu.wpi.first.smartdashboard.gui.elements;
 
+import javax.swing.BoxLayout;
+
+import edu.wpi.first.smartdashboard.ArctosLabel;
 import edu.wpi.first.smartdashboard.gui.elements.bindings.AbstractValueWidget;
 import edu.wpi.first.smartdashboard.properties.BooleanProperty;
 import edu.wpi.first.smartdashboard.properties.Property;
 import edu.wpi.first.smartdashboard.types.DataType;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 
 /**
  * Implements a simple text box UI element with a name label.
@@ -25,7 +26,7 @@ public class CheckBox extends AbstractValueWidget {
 
     setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
-    JLabel nameLabel = new JLabel(getFieldName());
+    ArctosLabel nameLabel = new ArctosLabel(getFieldName());
     valueField = new EditableBooleanValueCheckBox(getFieldName());
 
     add(nameLabel);

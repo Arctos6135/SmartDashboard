@@ -5,16 +5,18 @@
 
 package edu.wpi.first.smartdashboard.livewindow.elements;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BoxLayout;
+import javax.swing.JToggleButton;
+
 import edu.wpi.first.smartdashboard.gui.elements.bindings.AbstractTableWidget;
 import edu.wpi.first.smartdashboard.properties.Property;
 import edu.wpi.first.smartdashboard.types.DataType;
 import edu.wpi.first.smartdashboard.types.named.CompressorType;
 import edu.wpi.first.smartdashboard.types.named.DigitalOutputType;
 import edu.wpi.first.smartdashboard.types.named.SolenoidType;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.BoxLayout;
-import javax.swing.JToggleButton;
 
 /**
  * Controls a controller that is either on or off. Useful for solenoids.

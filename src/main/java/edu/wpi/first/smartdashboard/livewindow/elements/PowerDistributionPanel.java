@@ -1,14 +1,15 @@
 package edu.wpi.first.smartdashboard.livewindow.elements;
 
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
+import edu.wpi.first.smartdashboard.ArctosLabel;
 import edu.wpi.first.smartdashboard.gui.elements.bindings.AbstractTableWidget;
 import edu.wpi.first.smartdashboard.properties.Property;
 import edu.wpi.first.smartdashboard.types.DataType;
 import edu.wpi.first.smartdashboard.types.named.PowerDistributionPanelType;
 import edu.wpi.first.wpilibj.tables.ITableListener;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
 
 
 /**
@@ -21,9 +22,9 @@ public class PowerDistributionPanel extends AbstractTableWidget implements ITabl
   private final UneditableNumberField voltage = new UneditableNumberField();
   private final UneditableNumberField totCurrent = new UneditableNumberField();
   private final UneditableNumberField[] current = new UneditableNumberField[16];
-  private final JLabel[] curLabel = new JLabel[16];
-  private JLabel totCurLabel;
-  private JLabel voltageLabel;
+  private final ArctosLabel[] curLabel = new ArctosLabel[16];
+  private ArctosLabel totCurLabel;
+  private ArctosLabel voltageLabel;
 
   /**
    * @inheritdoc
@@ -37,8 +38,8 @@ public class PowerDistributionPanel extends AbstractTableWidget implements ITabl
     for (int i = 0; i < 8; i++) {
       c.gridx = 0;
       c.gridy = i + 1;
-      curLabel[i] = new JLabel("Chan" + i);
-      curLabel[i].setHorizontalAlignment(JLabel.RIGHT);
+      curLabel[i] = new ArctosLabel("Chan" + i);
+      curLabel[i].setHorizontalAlignment(ArctosLabel.RIGHT);
       add(curLabel[i], c);
       c.gridx = 1;
       current[i] = new UneditableNumberField();
@@ -49,8 +50,8 @@ public class PowerDistributionPanel extends AbstractTableWidget implements ITabl
     for (int i = 8; i < 16; i++) {
       c.gridx = 2;
       c.gridy = 16 - i;
-      curLabel[i] = new JLabel("Chan" + i);
-      curLabel[i].setHorizontalAlignment(JLabel.RIGHT);
+      curLabel[i] = new ArctosLabel("Chan" + i);
+      curLabel[i].setHorizontalAlignment(ArctosLabel.RIGHT);
       add(curLabel[i], c);
       c.gridx = 3;
       current[i] = new UneditableNumberField();
@@ -61,7 +62,7 @@ public class PowerDistributionPanel extends AbstractTableWidget implements ITabl
 
     c.gridy = 9;
     c.gridx = 0;
-    voltageLabel = new JLabel("Voltage");
+    voltageLabel = new ArctosLabel("Voltage");
     add(voltageLabel, c);
     c.gridx = 1;
     voltage.setFocusable(false);
@@ -70,7 +71,7 @@ public class PowerDistributionPanel extends AbstractTableWidget implements ITabl
     add(voltage, c);
 
     c.gridx = 2;
-    totCurLabel = new JLabel("TotalCurrent");
+    totCurLabel = new ArctosLabel("TotalCurrent");
     add(totCurLabel, c);
     c.gridx = 3;
     setNumberBinding("TotalCurrent", totCurrent);

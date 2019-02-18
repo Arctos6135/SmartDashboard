@@ -1,15 +1,16 @@
 package edu.wpi.first.smartdashboard.gui.elements;
 
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
+import edu.wpi.first.smartdashboard.ArctosLabel;
 import edu.wpi.first.smartdashboard.gui.elements.bindings.AbstractTableWidget;
 import edu.wpi.first.smartdashboard.livewindow.elements.Controller;
 import edu.wpi.first.smartdashboard.livewindow.elements.NameTag;
 import edu.wpi.first.smartdashboard.properties.Property;
 import edu.wpi.first.smartdashboard.types.DataType;
 import edu.wpi.first.smartdashboard.types.named.PIDType;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
 
 /**
  * @author Joe Grinstead
@@ -29,13 +30,13 @@ public class PIDEditor extends AbstractTableWidget implements Controller {
   private NumberTableField fField;
   private NumberTableField sField;
   private BooleanTableCheckBox eBox;
-  private JLabel tLabel;
-  private JLabel pLabel;
-  private JLabel iLabel;
-  private JLabel dLabel;
-  private JLabel fLabel;
-  private JLabel sLabel;
-  private JLabel eLabel;
+  private ArctosLabel tLabel;
+  private ArctosLabel pLabel;
+  private ArctosLabel iLabel;
+  private ArctosLabel dLabel;
+  private ArctosLabel fLabel;
+  private ArctosLabel sLabel;
+  private ArctosLabel eLabel;
 
   public PIDEditor() {
     this(true);
@@ -51,23 +52,23 @@ public class PIDEditor extends AbstractTableWidget implements Controller {
     setLayout(new GridBagLayout());
 
     if (editType) {
-      tLabel = new JLabel("PID type: ");
+      tLabel = new ArctosLabel("PID type: ");
     }
-    pLabel = new JLabel("P:");
-    iLabel = new JLabel("I:");
-    dLabel = new JLabel("D:");
-    fLabel = new JLabel("F:");
-    sLabel = new JLabel("Setpoint:");
-    eLabel = new JLabel("Enabled:");
+    pLabel = new ArctosLabel("P:");
+    iLabel = new ArctosLabel("I:");
+    dLabel = new ArctosLabel("D:");
+    fLabel = new ArctosLabel("F:");
+    sLabel = new ArctosLabel("Setpoint:");
+    eLabel = new ArctosLabel("Enabled:");
     if (editType) {
-      tLabel.setHorizontalAlignment(JLabel.RIGHT);
+      tLabel.setHorizontalAlignment(ArctosLabel.RIGHT);
     }
-    pLabel.setHorizontalAlignment(JLabel.RIGHT);
-    iLabel.setHorizontalAlignment(JLabel.RIGHT);
-    dLabel.setHorizontalAlignment(JLabel.RIGHT);
-    fLabel.setHorizontalAlignment(JLabel.RIGHT);
-    sLabel.setHorizontalAlignment(JLabel.RIGHT);
-    eLabel.setHorizontalAlignment(JLabel.RIGHT);
+    pLabel.setHorizontalAlignment(ArctosLabel.RIGHT);
+    iLabel.setHorizontalAlignment(ArctosLabel.RIGHT);
+    dLabel.setHorizontalAlignment(ArctosLabel.RIGHT);
+    fLabel.setHorizontalAlignment(ArctosLabel.RIGHT);
+    sLabel.setHorizontalAlignment(ArctosLabel.RIGHT);
+    eLabel.setHorizontalAlignment(ArctosLabel.RIGHT);
     if (editType) {
       tBox = new NumberTableComboBox<>("PID Type", pidTypes);
     }
@@ -116,7 +117,7 @@ public class PIDEditor extends AbstractTableWidget implements Controller {
     c.gridy = 0;
     c.fill = GridBagConstraints.HORIZONTAL;
     add(nameTag = new NameTag(""), c);
-    nameTag.setHorizontalAlignment(JLabel.LEFT);
+    nameTag.setHorizontalAlignment(ArctosLabel.LEFT);
     nameTag.setText(getFieldName());
     c.gridy = 1;
     if (editType) {

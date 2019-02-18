@@ -1,14 +1,15 @@
 package edu.wpi.first.smartdashboard.livewindow.elements;
 
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
+import edu.wpi.first.smartdashboard.ArctosLabel;
 import edu.wpi.first.smartdashboard.gui.elements.bindings.AbstractTableWidget;
 import edu.wpi.first.smartdashboard.properties.Property;
 import edu.wpi.first.smartdashboard.types.DataType;
 import edu.wpi.first.smartdashboard.types.named.ThreeAxisAccelerometerType;
 import edu.wpi.first.wpilibj.tables.ITableListener;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
 
 
 /**
@@ -21,9 +22,9 @@ public class ThreeAxisAccelerometer extends AbstractTableWidget implements ITabl
   private final UneditableNumberField x = new UneditableNumberField();
   private final UneditableNumberField y = new UneditableNumberField();
   private final UneditableNumberField z = new UneditableNumberField();
-  private JLabel xLabel;
-  private JLabel yLabel;
-  private JLabel zLabel;
+  private ArctosLabel xLabel;
+  private ArctosLabel yLabel;
+  private ArctosLabel zLabel;
 
   /**
    * @inheritdoc
@@ -37,7 +38,7 @@ public class ThreeAxisAccelerometer extends AbstractTableWidget implements ITabl
 
     c.gridy = 1;
     c.gridx = 0;
-    xLabel = new JLabel("X");
+    xLabel = new ArctosLabel("X");
     add(xLabel, c);
     c.gridx = 1;
     x.setFocusable(false);
@@ -47,7 +48,7 @@ public class ThreeAxisAccelerometer extends AbstractTableWidget implements ITabl
 
     c.gridy = 2;
     c.gridx = 0;
-    yLabel = new JLabel("Y");
+    yLabel = new ArctosLabel("Y");
     add(yLabel, c);
     c.gridx = 1;
     y.setFocusable(false);
@@ -57,7 +58,7 @@ public class ThreeAxisAccelerometer extends AbstractTableWidget implements ITabl
 
     c.gridy = 3;
     c.gridx = 0;
-    zLabel = new JLabel("Z");
+    zLabel = new ArctosLabel("Z");
     add(zLabel, c);
     c.gridx = 1;
     z.setFocusable(false);

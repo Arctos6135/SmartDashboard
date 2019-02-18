@@ -5,17 +5,19 @@
 
 package edu.wpi.first.smartdashboard.livewindow.elements;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JComboBox;
+
 import edu.wpi.first.smartdashboard.gui.elements.Compass;
 import edu.wpi.first.smartdashboard.gui.elements.bindings.AbstractTableWidget;
 import edu.wpi.first.smartdashboard.properties.Property;
 import edu.wpi.first.smartdashboard.types.DataType;
 import edu.wpi.first.smartdashboard.types.named.CompassType;
 import edu.wpi.first.smartdashboard.types.named.LWGyroType;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JComboBox;
 
 
 /**
