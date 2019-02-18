@@ -14,10 +14,21 @@ public class GoArctos extends Label {
         super();
     }
 
+    public static Font lemonMilk;
+    static {
+        try {
+            lemonMilk = Font.createFont(Font.TRUETYPE_FONT, ClassLoader.getSystemClassLoader().getResourceAsStream("lemon_milk/LemonMilkbold.ttf"))
+                    .deriveFont(30.0f);
+        }
+        catch(Exception e) {
+            lemonMilk = new Font("Comic Sans MS", Font.BOLD, 12);
+        }
+    }
+
     @Override
     public void init() {
         super.init();
-        label.setFont(label.getFont().deriveFont(30.0f));
+        label.setFont(lemonMilk);
         text.setValue("GO ARCTOS");
         propertyChanged(text);
     }
