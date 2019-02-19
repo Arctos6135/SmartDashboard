@@ -19,7 +19,7 @@ public class ConfigurableMjpgStreamViewer extends MjpgStreamViewerImpl {
   public static BufferedImage noConnectionImage;
   static {
     try {
-      var imgStream = ClassLoader.getSystemClassLoader().getResourceAsStream("arctos4.PNG");
+      var imgStream = ClassLoader.getSystemClassLoader().getResourceAsStream("arctos4.gif");
       noConnectionImage = ImageIO.read(imgStream);
     }
     catch(Exception e) {
