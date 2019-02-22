@@ -1,4 +1,6 @@
 # ArctosDashboard
+[![Build Status](https://travis-ci.com/Arctos6135/SmartDashboard.svg?branch=master)](https://travis-ci.com/Arctos6135/SmartDashboard) (Arctos6135/SmartDashboard)
+
 Welcome to the ArctosDashboard project! This is a mod to the WPILib SmartDashboard project. Originally forked for a bug fix, the mod now contains numerous improvements such as a better camera stream viewer, and lots of customized team elements.
 
 (If you're not on team 6135, you probably won't want to use this.)
@@ -6,7 +8,7 @@ Welcome to the ArctosDashboard project! This is a mod to the WPILib SmartDashboa
 # WPILib README
 ## SmartDashboard Project
 
-[![Build Status](https://dev.azure.com/wpilib/DesktopTools/_apis/build/status/wpilibsuite.SmartDashboard)](https://dev.azure.com/wpilib/DesktopTools/_build/latest?definitionId=12)
+[![Build Status](https://dev.azure.com/wpilib/DesktopTools/_apis/build/status/wpilibsuite.SmartDashboard)](https://dev.azure.com/wpilib/DesktopTools/_build/latest?definitionId=12) (wpilibsuite/SmartDashboard)
 
 Welcome to the WPILib project. This repository contains the SmartDashboard project.
 
