@@ -289,11 +289,11 @@ public class DashboardMenu extends JMenuBar {
   public static void setFontAll(Component comp, Font font) {
     // Special font for GoArctos!
     if(!(comp instanceof GoArctos)) {
-      comp.setFont(font);
-    }
-    if(comp instanceof Container) {
-      for(Component child : ((Container) comp).getComponents()) {
-        setFontAll(child, font);
+      comp.setFont(font.deriveFont((float) comp.getFont().getSize()).deriveFont(comp.getFont().getStyle()));
+      if(comp instanceof Container) {
+        for(Component child : ((Container) comp).getComponents()) {
+          setFontAll(child, font);
+        }
       }
     }
   }

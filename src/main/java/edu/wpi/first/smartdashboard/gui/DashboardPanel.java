@@ -54,7 +54,6 @@ public class DashboardPanel extends JPanel {
   public static class BackPane extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
-      System.out.println("Paint component");
       super.paintComponent(g);
       if (arctosify)
         g.drawImage(arctosLogo, 0, 0, getWidth(), getHeight(), null);
