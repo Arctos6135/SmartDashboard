@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import edu.wpi.first.smartdashboard.gui.StaticWidget;
+import edu.wpi.first.smartdashboard.properties.IntegerProperty;
 import edu.wpi.first.smartdashboard.properties.MultiProperty;
 import edu.wpi.first.smartdashboard.properties.Property;
 import edu.wpi.first.smartdashboard.properties.StringProperty;
@@ -18,6 +19,7 @@ public class Label extends StaticWidget {
   public final StringProperty text = new StringProperty(this, "Text", "Label");
   public final MultiProperty horizontal = new MultiProperty(this, "Horizontal Alignment");
   public final MultiProperty vertical = new MultiProperty(this, "Vertical Alignment");
+  public final IntegerProperty fontSize = new IntegerProperty(this, "Font Size");
 
   protected JLabel label;
 
@@ -38,6 +40,7 @@ public class Label extends StaticWidget {
     setLayout(new BorderLayout());
 
     label = new JLabel(text.getValue());
+    fontSize.setValue(label.getFont().getSize());
 
     label.setHorizontalAlignment((Integer) horizontal.getValue());
     label.setVerticalAlignment((Integer) vertical.getValue());
@@ -53,6 +56,8 @@ public class Label extends StaticWidget {
       label.setHorizontalAlignment((Integer) horizontal.getValue());
     } else if (property == vertical) {
       label.setVerticalAlignment((Integer) vertical.getValue());
+    } else if (property == fontSize) {
+      label.setFont(label.getFont().deriveFont((float) fontSize.getValue()));
     }
   }
 }

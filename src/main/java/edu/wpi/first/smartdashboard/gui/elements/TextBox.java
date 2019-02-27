@@ -7,6 +7,7 @@ import javax.swing.JTextField;
 import edu.wpi.first.smartdashboard.gui.elements.bindings.AbstractValueWidget;
 import edu.wpi.first.smartdashboard.properties.BooleanProperty;
 import edu.wpi.first.smartdashboard.properties.ColorProperty;
+import edu.wpi.first.smartdashboard.properties.IntegerProperty;
 import edu.wpi.first.smartdashboard.properties.Property;
 import edu.wpi.first.smartdashboard.types.DataType;
 
@@ -23,13 +24,16 @@ public class TextBox extends AbstractValueWidget {
 
   public final BooleanProperty editable = new BooleanProperty(this, "Editable", true);
   public final ColorProperty background = new ColorProperty(this, "Background");
+  public final IntegerProperty fontSize = new IntegerProperty(this, "Font Size");
 
   private JTextField valueField;
+  private JLabel nameLabel;
 
   public void init() {
     setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
-    JLabel nameLabel = new JLabel(getFieldName());
+    nameLabel = new JLabel(getFieldName());
+    fontSize.setValue(nameLabel.getFont().getSize());
 
     if (getType().isChildOf(DataType.BOOLEAN)) {
       valueField = new EditableBooleanValueField(getFieldName());
@@ -58,6 +62,11 @@ public class TextBox extends AbstractValueWidget {
       valueField.setBackground(background.getValue());
     } else if (property == editable) {
       valueField.setEditable(editable.getValue());
+    } else if (property == fontSize) {
+      if(valueField != null)
+        valueField.setFont(valueField.getFont().deriveFont((float) fontSize.getValue()));
+      if(nameLabel != null)
+        nameLabel.setFont(nameLabel.getFont().deriveFont((float) fontSize.getValue()));
     }
   }
 
