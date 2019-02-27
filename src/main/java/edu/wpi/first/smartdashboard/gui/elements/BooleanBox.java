@@ -2,6 +2,8 @@ package edu.wpi.first.smartdashboard.gui.elements;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -26,17 +28,40 @@ public class BooleanBox extends AbstractValueWidget {
   public final ColorProperty colorOnFalse
       = new ColorProperty(this, "Color to show when false", Color.RED);
   public final IntegerProperty fontSize = new IntegerProperty(this, "Font Size");
-  private JPanel valueField;
+  private BooleanIndicator valueField;
   private boolean value;
   private JLabel nameLabel;
+
+  private static class BooleanIndicator extends JPanel {
+    private Color color;
+    
+    public void setColor(Color color) {
+      this.color = color;
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+      super.paintComponent(g);
+      Graphics2D g2d = (Graphics2D) g;
+      g.setColor(color);
+      g2d.fillOval(0, 0, getWidth(), getHeight());
+      g.setColor(Color.BLACK);
+      g2d.drawOval(0, 0, getWidth(), getHeight());
+    }
+  }
 
   public void init() {
     setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
     nameLabel = new JLabel(getFieldName());
     
-    valueField = new JPanel();
+    valueField = new BooleanIndicator();
     valueField.setPreferredSize(new Dimension(10, 10));
+    valueField.setMinimumSize(new Dimension(10, 10));
+    valueField.setMaximumSize(new Dimension(10, 10));
+    setValue(false);
+
+    fontSize.setValue(nameLabel.getFont().getSize());
 
     add(valueField);
     add(nameLabel);
@@ -47,7 +72,7 @@ public class BooleanBox extends AbstractValueWidget {
   @Override
   public void setValue(final boolean value) {
     this.value = value;
-    valueField.setBackground(value ? colorOnTrue.getValue() : colorOnFalse.getValue());
+    valueField.setColor(value ? colorOnTrue.getValue() : colorOnFalse.getValue());
     repaint();
   }
 
@@ -56,8 +81,11 @@ public class BooleanBox extends AbstractValueWidget {
     if(property == fontSize) {
       if(nameLabel != null)
         nameLabel.setFont(nameLabel.getFont().deriveFont((float) fontSize.getValue()));
-      if(valueField != null)
+      if(valueField != null) {
         valueField.setPreferredSize(new Dimension(fontSize.getValue(), fontSize.getValue()));
+        valueField.setMaximumSize(new Dimension(fontSize.getValue(), fontSize.getValue()));
+        valueField.setMinimumSize(new Dimension(fontSize.getValue(), fontSize.getValue()));
+      }
     }
     setValue(value); //force background change
   }
