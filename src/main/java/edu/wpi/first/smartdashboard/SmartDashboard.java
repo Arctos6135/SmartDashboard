@@ -58,39 +58,52 @@ public class SmartDashboard {
    * @see SmartDashboard#inCompetition() inCompetition()
    */
   public static void main(final String[] args) {
-    try {
-      singleInstanceSocket = new ServerSocket(61350, 1, InetAddress.getLocalHost());
-    } catch (UnknownHostException e) {
-      // Should not happen
-      e.printStackTrace();
-      System.exit(1);
-    } catch (IOException e) {
-      // Another instance is already running
-      try {
-        SwingUtilities.invokeAndWait(() -> {
-          JOptionPane.showMessageDialog(null, "Another instance of ArctosDashboard is already running!", "Error",
-              JOptionPane.ERROR_MESSAGE);
-          System.exit(0);
-        });
-      } catch (InterruptedException | InvocationTargetException e1) {
-        e1.printStackTrace();
-        System.exit(1);
+    // Parse all arguments to see if multiple instances are allowed
+    boolean allowMultiple = false;
+    for(String s : args) {
+      if(s.equals("-m") || s.equals("--allow-multiple")) {
+        allowMultiple = true;
       }
     }
-
-    Runtime.getRuntime().addShutdownHook(new Thread() {
-      @Override
-      public void run() {
-        if (singleInstanceSocket != null && !singleInstanceSocket.isClosed()) {
-          try {
-            singleInstanceSocket.close();
-          } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1);
-          }
+    // If multiple instances are not allowed, do a single instance check using sockets
+    if(!allowMultiple) {
+      try {
+        singleInstanceSocket = new ServerSocket(61350, 1, InetAddress.getLocalHost());
+      } catch (UnknownHostException e) {
+        // Should not happen
+        e.printStackTrace();
+        System.exit(1);
+      } catch (IOException e) {
+        // Another instance is already running
+        try {
+          // Show error dialog and exit
+          SwingUtilities.invokeAndWait(() -> {
+            JOptionPane.showMessageDialog(null, "Another instance of ArctosDashboard is already running!", "Error",
+                JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+          });
+        } catch (InterruptedException | InvocationTargetException e1) {
+          // Should not happen
+          e1.printStackTrace();
+          System.exit(1);
         }
       }
-    });
+      // Add a shutdown hook so the socket can be cleaned up when the program exits
+      Runtime.getRuntime().addShutdownHook(new Thread() {
+        @Override
+        public void run() {
+          if (singleInstanceSocket != null && !singleInstanceSocket.isClosed()) {
+            try {
+              singleInstanceSocket.close();
+            } catch (IOException e) {
+              // Probably should not happen
+              e.printStackTrace();
+              System.exit(1);
+            }
+          }
+        }
+      });
+    }
 
     try {
       SwingUtilities.invokeAndWait(new Runnable() {
