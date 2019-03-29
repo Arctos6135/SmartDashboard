@@ -12,8 +12,6 @@ import javax.swing.ProgressMonitor;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import com.sun.jdi.InvocationException;
-
 import edu.wpi.first.smartdashboard.gui.DashboardFrame;
 import edu.wpi.first.smartdashboard.properties.IntegerProperty;
 import edu.wpi.first.smartdashboard.robot.Robot;
@@ -78,6 +76,11 @@ public class SmartDashboard {
         try {
           // Show error dialog and exit
           SwingUtilities.invokeAndWait(() -> {
+            try {
+              UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            } catch (Exception e1) {
+              e1.printStackTrace();
+            }
             JOptionPane.showMessageDialog(null, "Another instance of ArctosDashboard is already running!", "Error",
                 JOptionPane.ERROR_MESSAGE);
             System.exit(0);
@@ -111,7 +114,7 @@ public class SmartDashboard {
           try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
           } catch (Exception e) {
-            // TODO
+            e.printStackTrace();
           }
         }
       });
