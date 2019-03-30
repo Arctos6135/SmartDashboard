@@ -70,7 +70,7 @@ public class SmartDashboard {
     if(!allowMultiple) {
       try {
         // Try creating the lock file and aquire a channel
-        lockFile = new File(System.getProperty("user.dir") + File.separator + ".arctosdashboard.lock");
+        lockFile = new File(System.getProperty("user.home") + File.separator + ".arctosdashboard.lock");
         lockChannel = new RandomAccessFile(lockFile, "rw").getChannel();
         try {
           // Attempt to lock it
