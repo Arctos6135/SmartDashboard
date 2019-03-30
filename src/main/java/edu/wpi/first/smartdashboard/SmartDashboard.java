@@ -2,10 +2,11 @@ package edu.wpi.first.smartdashboard;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.lang.reflect.InvocationTargetException;
-import java.net.InetAddress;
-import java.net.ServerSocket;
-import java.net.UnknownHostException;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
+import java.nio.channels.OverlappingFileLockException;
 
 import javax.swing.JOptionPane;
 import javax.swing.ProgressMonitor;
@@ -46,7 +47,9 @@ public class SmartDashboard {
 
   public static DashboardFrame frame;
 
-  static ServerSocket singleInstanceSocket;
+  static File lockFile;
+  static FileChannel lockChannel;
+  static FileLock singleInstanceLock;
 
   /**
    * Starts the program
@@ -66,14 +69,20 @@ public class SmartDashboard {
     // If multiple instances are not allowed, do a single instance check using sockets
     if(!allowMultiple) {
       try {
-        singleInstanceSocket = new ServerSocket(61350, 1, InetAddress.getLocalHost());
-      } catch (UnknownHostException e) {
-        // Should not happen
-        e.printStackTrace();
-        System.exit(1);
-      } catch (IOException e) {
-        // Another instance is already running
+        // Try creating the lock file and aquire a channel
+        lockFile = new File(System.getProperty("user.dir") + File.separator + ".arctosdashboard.lock");
+        lockChannel = new RandomAccessFile(lockFile, "rw").getChannel();
         try {
+          // Attempt to lock it
+          singleInstanceLock = lockChannel.tryLock();
+        }
+        catch(OverlappingFileLockException e) {
+          // If it failed there's another instance running already
+          singleInstanceLock = null;
+        }
+        
+        if(singleInstanceLock == null) {
+          // Lock failed - another instance is running
           // Show error dialog and exit
           SwingUtilities.invokeAndWait(() -> {
             try {
@@ -85,27 +94,37 @@ public class SmartDashboard {
                 JOptionPane.ERROR_MESSAGE);
             System.exit(0);
           });
-        } catch (InterruptedException | InvocationTargetException e1) {
-          // Should not happen
-          e1.printStackTrace();
-          System.exit(1);
         }
-      }
-      // Add a shutdown hook so the socket can be cleaned up when the program exits
-      Runtime.getRuntime().addShutdownHook(new Thread() {
-        @Override
-        public void run() {
-          if (singleInstanceSocket != null && !singleInstanceSocket.isClosed()) {
+        
+        // Add a shutdown hook so the socket can be cleaned up when the program exits
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+          @Override
+          public void run() {
             try {
-              singleInstanceSocket.close();
-            } catch (IOException e) {
-              // Probably should not happen
+              // Release lock
+              if(singleInstanceLock != null) {
+               singleInstanceLock.release();
+              }
+              // Close channel
+              if(lockChannel != null) {
+                lockChannel.close();
+              }
+              // Delete file
+              if(lockFile != null) {
+                lockFile.delete();
+              }
+            }
+            catch(IOException e) {
               e.printStackTrace();
               System.exit(1);
             }
           }
-        }
-      });
+        });
+      }
+      catch(IOException | InvocationTargetException | InterruptedException e) {
+        e.printStackTrace();
+        System.exit(1);
+      }
     }
 
     try {
