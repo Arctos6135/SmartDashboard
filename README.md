@@ -3,7 +3,7 @@
 
 Welcome to the ArctosDashboard project! This is a mod to the WPILib SmartDashboard project. Originally forked for a bug fix, the mod now contains numerous improvements such as a better camera stream viewer, and lots of customized team elements.
 
-(If you're not on team 6135, you probably won't want to use this.)
+***This repository has been archived as Team Arctos now uses Shuffleboard instead of SmartDashboard. Find our custom Shuffleboard Plugins at https://github.com/Arctos6135/StdPlug.***
 
 # WPILib README
 ## SmartDashboard Project
